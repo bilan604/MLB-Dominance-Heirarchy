@@ -38,13 +38,11 @@ for i in range(15, 2686):
 
 score_1 = [int(s) for s in score_1]
 score_2 = [int(s) for s in score_2]
-
-
-
-
 winning_team = [getOutcome(s1, s2) for s1, s2 in zip(score_1, score_2)]
 
+
 df = pd.DataFrame({"Team1": team_1, "Team2": team_2, "Score1": score_1, "Score2": score_2, "WinningTeam": winning_team})
+
 
 team_names = list(unique(team_1 + team_2))
 wins = [np.sum(A[:, j]) for j in range(p)]
@@ -54,14 +52,5 @@ WL_ratio = [w/l for w,l in zip(wins, losses)]
 
 dd_teams = {"Name": team_names, "Wins": wins, "Losses": losses, "WLRatio": WL_ratio}
 df_teams = pd.DataFrame(dd_teams)
-
-
-
-
-
-
-
-
-
 
 
