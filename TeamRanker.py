@@ -178,13 +178,13 @@ B = makeB(A, p)
 C = makeC(A, p)
 D = makeD(A, p)
 
-
+# Optional: using the iterative page algorithm solver
+# note that A vs A.T should be the best and the worst teams
+"""
 n = len(A)
 ninv = 1/n
 TP = 0.85
 TP_away = (1-TP)
-# note that A vs A.T should be the best and the worst teams
-"""
 network = Network(A)
 network.surf(150)
 """
@@ -193,15 +193,18 @@ network.surf(150)
 A_rnorm = A.copy()
 for i in range(len(A_rnorm)):
     A_rnorm[i] = A_rnorm[i]/np.sum(A_rnorm[i])
-    
+
+
 A_cnorm = A.copy()
 for j in range(len(A_cnorm)):
     A_cnorm[:,j] = A_cnorm[:,j]/np.sum(A_cnorm[:,j])
 
 
+# A dictionary of The Team Ranks
 ttA = topTeams2(A, 0.85, 11)
 
-# Plotting them
+
+# A seaborn barplot of the Team Ranks (Jupyter Environment)
 """
 sns.barplot(y="Team", x="Dominance", data=pd.DataFrame({ "Dominance":ravel(list(ttA.values())), "Team": list(ttA.keys()) }))
 """
