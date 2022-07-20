@@ -13,11 +13,11 @@ from numpy.linalg import svd, inv, qr, det
 from sklearn.linear_model import LinearRegression
 
 
-def topteams(__PRs, __U, __n = 10, TR=False):
+def topTeams(__PRs, __U, __n = 10, TR=False):
     dd = {i: __PRs[i] for i in range(len(__PRs))}
-    dd = {__U[page]: rank for page, rank in sorted(dd.items(), key=lambda kv: kv[1], reverse=True)}
-    __pages = list(dd.keys())[:__n]
-    dd= {page: dd[page] for page in __pages}
+    dd = {__U[team]: rank for team, rank in sorted(dd.items(), key=lambda kv: kv[1], reverse=True)}
+    __teams = list(dd.keys())[:__n]
+    dd= {page: dd[team] for team in __teams}
     if TR:
         return {"Link": list(dd.keys()), "Value": ravel(list(dd.values()))}
     return dd
@@ -26,10 +26,10 @@ def topteams(__PRs, __U, __n = 10, TR=False):
 def viewTopTeams(__PRs, __U, __n = 10):
     if type(__PRs[0]) in (list, np.array, np.matrix):
         __PRs = __PRs
-    __topPages = topPages(__PRs, __U, __n)
-    for __page in __topPages:
-        print(__page, __topPages[__page])
-    return __topPages
+    __topTeams = topTeams(__PRs, __U, __n)
+    for __team in __topTeams:
+        print(__team, __topTeams[__page])
+    return __topTeams
     
 
 def convertToP(_A, tp=0.85):
