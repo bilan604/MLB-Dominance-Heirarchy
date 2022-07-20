@@ -36,6 +36,7 @@ for i in range(15, 2686):
         score2 = re.sub("[^0-9]","",game[5])
         score_2.append(score2)
 
+        
 score_1 = [int(s) for s in score_1]
 score_2 = [int(s) for s in score_2]
 winning_team = [getOutcome(s1, s2) for s1, s2 in zip(score_1, score_2)]
