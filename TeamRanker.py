@@ -18,14 +18,14 @@ def topTeams(__PRs, __U, __n = 10, TR=False):
     dd = {__U[team]: rank for team, rank in sorted(dd.items(), key=lambda kv: kv[1], reverse=True)}
     __teams = list(dd.keys())[:__n]
     dd= {page: dd[team] for team in __teams}
-    if TR:
-        return {"Link": list(dd.keys()), "Value": ravel(list(dd.values()))}
-    return dd
+    if not TR:
+        return dd
+    return {"Link": list(dd.keys()), "Value": ravel(list(dd.values()))}
 
 
 def viewTopTeams(__PRs, __U, __n = 10):
     if type(__PRs[0]) in (list, np.array, np.matrix):
-        __PRs = __PRs
+        __PRs = np.ravel(__PRs)
     __topTeams = topTeams(__PRs, __U, __n)
     for __team in __topTeams:
         print(__team, __topTeams[__page])
@@ -124,8 +124,8 @@ def makeB(_A, p):
                     B[i,j] = c1 - c2
     return B
 
-# 1 0 who better
-def makeC(_A, p): # p is variable count
+# Binary Matrix
+def makeC(_A, p):
     C = np.zeros((p,p))
     C = np.matrix(C)
     for i in range(p):
@@ -152,7 +152,7 @@ def makeD(_A, p):
     return D
 
 
-# p = number of teams
+# p = 30 (the number of teams)
 p = len(team_names)
 
 # A = pxp non-symetric adjacency matrix containing
