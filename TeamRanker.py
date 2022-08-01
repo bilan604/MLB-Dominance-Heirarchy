@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from timeit import default_timer
-from numpy import unique, ravel
+from numpy import unique, ravel, zeros
 from numpy import sqrt, array, diagonal, mean, transpose, eye, ones
 from numpy import transpose, diag, dot
 from numpy.linalg import svd, inv, qr, det
@@ -111,8 +111,7 @@ class Network(object):
 
 
 def makeB(_A, p):
-    B = np.zeros((p,p))
-    B = np.matrix(B)
+    B = array(zeros((p,p)))
     for i in range(p):
         for j in range(p):
             if i != j:
@@ -126,8 +125,7 @@ def makeB(_A, p):
 
 # Binary Matrix
 def makeC(_A, p):
-    C = np.zeros((p,p))
-    C = np.matrix(C)
+    C = array(zeros((p,p)))
     for i in range(p):
         for j in range(p):
             if i != j:
@@ -141,8 +139,7 @@ def makeC(_A, p):
 
 
 def makeD(_A, p):
-    D = np.zeros((p,p))
-    D = np.matrix(C)
+    D = array(zeros((p,p)))
     for i in range(len(_A)):
         for j in range(len(_A[0])):
             rs = np.sum(_A[i])
@@ -158,7 +155,7 @@ p = len(team_names)
 # A = pxp non-symetric adjacency matrix containing
 # data for the games of the MLB 2021 season
 A = np.zeros((p,p))
-A = np.matrix(A)
+A = np.array(A)
 
 # if team 1 won, then team 2 feeds/adds "dominance" to team 1
 for i in range(1000,len(df)-50):
